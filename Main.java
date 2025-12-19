@@ -15,16 +15,16 @@ public class Main
     while (sc.hasNext())  // as long as the Scanner has more lines to read from the file...
     {
       String line = sc.nextLine();  // gets the next line of input.  This is like "R802"
-      int posNeg;
+      String direction;
 
       // TODO: Write code that gets the turning direction from the line.  This should be "L" or "R"
       if (line.indexOf("L") == 0)
       {
-        posNeg = -1;
+        direction = "L";
       }
       else
       {
-        posNeg = 1;
+        direction = "R";
       }
       // TODO: Write code that gets a substring of the line that contains only the numbers
       // For R802, this would be a String variable with the value "802"
@@ -39,16 +39,31 @@ public class Main
 
       // TODO: Now that you have the turning direction, and the turning amount, see if the turn results in a 0
       
-      int addAnswer = added *posNeg;
-   
-
-      if (((sum%100 + addAnswer) - 100 >= 0) ||(sum%100 + addAnswer <= 0))
+      if (direction.equals("R"))
       {
-        answer++;
+        int crosses = (sum + added) / 100;
+        answer += crosses;
+        sum = (sum + added) % 100;
+      }
+      else if (direction.equals("L"))
+      {
+        int crosses = (sum - added) / 100;
+        
+
+        
+        
+        if ((sum - added) > 0)
+        {
+          sum = ((sum - added) % 100);
+        } 
+        else if ((sum - added) < 0)
+        {
+          sum = ((sum - added) % 100) * - 1
+        }
       }
 
-      sum += addAnswer;
-      
+
+
       /* if (sum % 100 == 0 )
       {
         answer++;
